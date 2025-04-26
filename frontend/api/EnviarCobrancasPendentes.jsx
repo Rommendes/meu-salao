@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import axios from "axios";
 import { SendHorizonal } from "lucide-react";
 import { supabase } from "../src/supabaseClient";
 
@@ -40,16 +40,14 @@ const EnviarCobrancasPendentes = () => {
       return;
     }
 
-    const numero = cliente.telefone.replace(/\D/g, "");
-    const mensagem = `Olá ${cliente.nome}, notamos que há um pagamento pendente no valor de R$ ${valor} referente ao seu atendimento. Por favor, entre em contato para regularizar. Obrigada! 💇‍♀️`;
-
-    const url = `https://api.callmebot.com/whatsapp.php?phone=55${numero}&text=${encodeURIComponent(
-      mensagem
-    )}&apikey=8996545`;
-
     try {
-      const resposta = await fetch(url);
-      if (resposta.ok) {
+      const resposta = await axios.post("/api/enviar-cobrancas", {
+        nome: cliente.nome,
+        telefone: cliente.telefone,
+        valor: valor,
+      });
+
+      if (resposta.status === 200) {
         setStatusEnvio((prev) => ({ ...prev, [agendamento.id]: "✅ Enviado" }));
       } else {
         setStatusEnvio((prev) => ({ ...prev, [agendamento.id]: "❌ Erro" }));
@@ -84,22 +82,18 @@ const EnviarCobrancasPendentes = () => {
                 <td className="border p-2">R$ {agendamento.valor}</td>
                 <td className="border p-2">{statusEnvio[agendamento.id] || "Pendente"}</td>
                 <td className="border p-2">
-                  
-                 
-                <button
-                  onClick={() => enviarCobranca(agendamento)}
-                  disabled={statusEnvio[agendamento.id] === "✅ Enviado"}
-                  className={`px-3 py-1 rounded flex items-center gap-1 text-white ${
-                    statusEnvio[agendamento.id] === "✅ Enviado"
-                      ? "bg-primary cursor-not-allowed"
-                      : "bg-secondary hover:bg-secondary-dark"
-                  }`}
-                >
-                  <SendHorizonal size={16} />
-                  {statusEnvio[agendamento.id] === "✅ Enviado" ? "Enviado" : "Enviar"}
-                </button>
-
-
+                  <button
+                    onClick={() => enviarCobranca(agendamento)}
+                    disabled={statusEnvio[agendamento.id] === "✅ Enviado"}
+                    className={`px-3 py-1 rounded flex items-center gap-1 text-white ${
+                      statusEnvio[agendamento.id] === "✅ Enviado"
+                        ? "bg-primary cursor-not-allowed"
+                        : "bg-secondary hover:bg-secondary-dark"
+                    }`}
+                  >
+                    <SendHorizonal size={16} />
+                    {statusEnvio[agendamento.id] === "✅ Enviado" ? "Enviado" : "Enviar"}
+                  </button>
                 </td>
               </tr>
             ))}
