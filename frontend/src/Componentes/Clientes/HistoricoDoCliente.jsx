@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "../../api/supabaseClient";
 
 const HistoricoDoCliente = ({ clienteId }) => {
   const [agendamentos, setAgendamentos] = useState([]);

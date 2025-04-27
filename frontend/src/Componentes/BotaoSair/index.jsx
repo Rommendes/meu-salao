@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "../../api/supabaseClient";
 import { Icon } from "@mui/material";
 
 const BotaoSair = () => {

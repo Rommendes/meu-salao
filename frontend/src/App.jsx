@@ -8,10 +8,10 @@ import Home from "./Pages/Home"
 import CadastrarCliente from "./Componentes/CadastrarCliente/CadastrarCliente";
 import ListaClientes from "./Componentes/ListaClientes/ListaClientes.jsx"
 import EditarCliente from "./Componentes/EditarCliente/editarCliente.jsx"
-import Agenda from "./Componentes/Agenda/Agenda.jsx"
+import Agenda from "./Pages/Agenda.jsx"
 import BuscaCliente from "./Componentes/Clientes/buscaCliente.jsx"
-import HistoricoSemanal from "./Componentes/Agenda/HistoricoSemanal.jsx"
-import CobrancasPendentes from "../api/EnviarCobrancasPendentes.jsx"
+import HistoricoSemanal from "./Pages/HistoricoSemanal.jsx"
+import CobrancasPendentes from "./Pages/EnviarCobrancasPendentes.jsx"
 
 
 function App() {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "../../supabaseClient"; // Importe seu Supabase
+import { supabase } from "../../api/supabaseClient"; // Importe seu Supabase
 import EnderecoForm from "../EnderecoForm";
 
 import Header from "../Header/Header";

@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "../../api/supabaseClient";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditarCliente = () => {

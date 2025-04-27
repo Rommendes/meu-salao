@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "../api/supabaseClient";
 import { Pencil, Trash2, Save } from "lucide-react";
 
-import InputData from "../CamposReutilizaveis/InputData";
-import InputHorario from "../CamposReutilizaveis/InputHorario";
-import Header from "../Header/Header";
+import InputData from "../Componentes/CamposReutilizaveis/InputData"
+import InputHorario from "../Componentes/CamposReutilizaveis/InputHorario";
+import Header from "../Componentes/Header/Header";
 
 function formatarValor(valor) {
   return new Intl.NumberFormat('pt-BR', {

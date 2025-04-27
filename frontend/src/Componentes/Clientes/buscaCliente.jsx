@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { supabase } from "../../supabaseClient";
+import { supabase } from "../../api/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import HistoricoDoCliente from "./HistoricoDoCliente";
