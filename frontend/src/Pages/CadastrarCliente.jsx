@@ -115,20 +115,12 @@ const CadastrarCliente = () => {
 
   return (
     <>
-     <style>{`
-      body {
-        
-      
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    `}</style>
    
-    <div className=" mt-4 ">
+   
+    <div className=" container mx-auto p-4 ">
     <Header title="Cadastro de Cliente"/>
 
-      <div className="bg-white sm:p-8 w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl  shadow-2xl rounded-lg">
+      <div className="w-full max-w-[100%] mx-auto border border-violet-200 p-4 rounded-lg bg-gray-50 shadow-lg">
         <div> 
 
         <div className="flex-wrap">
@@ -153,7 +145,7 @@ const CadastrarCliente = () => {
               />
               {errors.nome && <p className="text-red-500 text-sm">{errors.nome}</p>}
             </div>
-
+          <div className="grid lg:grid-cols-3 gap-4 sm:grid-cols-1">
             {/* Telefone */}
             <div>
               <label className="block font-medium text-left px-2">
@@ -193,7 +185,7 @@ const CadastrarCliente = () => {
                 className="input-padrao"
               />
             </div>
-
+            </div>
             {/* Endereço */}
             <EnderecoForm formData={formData.endereco} handleChange={handleEnderecoChange} />
 

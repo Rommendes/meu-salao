@@ -180,9 +180,6 @@ const AgendaAtendimento = () => {
   return (
     <div className="container mx-auto p-4">
 
-      {/* Código do JSX aqui... */}
-      <div className="container mx-auto p-4">
-
     <Header/>
 
 {/* 🟡 FORMULÁRIO DE NOVO AGENDAMENTO */}
@@ -298,16 +295,7 @@ className="input-padrao resize-none h-[38px]"
 />
 </div>
 
-{/* Botão salvar */}
-{/* <div className="flex items-end">
-<button
-onClick={salvarAgendamento}
-className="bg-secondary px-4 py-2 rounded hover:bg-alternativo text-white shadow flex items-center gap-2"
->
-<Save size={20} />
-<span className="hidden sm:inline">Salvar</span>
-</button>
-</div> */}
+
 </div>
 <button
 onClick={salvarAgendamento}
@@ -330,17 +318,17 @@ className="bg-secondary px-4 py-2 rounded hover:bg-alternativo text-white shadow
 
   <div className="overflow-x-auto">
     <table className="w-full border min-w-[700px]">
-      <thead className="bg-violet-200 text-sm uppercase  font-bold ">
+      <thead className="bg-gray-100 text-sm uppercase text-cinza font-bold ">
         <tr className="overflow-x-auto">
-          <th className="border-2 px-5 py-3">Data</th>
-          <th className="border-2 px-4 py-3">Horário</th>
-          <th className="border-2 px-2 min-w-[180px] text-center">Cliente</th>
-          <th className="border-2 px-4 py-3">Serviço</th>
+          <th className="border p-2">Data</th>
+          <th className="border p-2">Horário</th>
+          <th className="border p-2 min-w-[180px] text-center">Cliente</th>
+          <th className="border p-2">Serviço</th>
           
-          <th className="border-2 px-4 py-3">Valor</th>
-          <th className="border-2 px-4 py-3">Pagamento</th>
-          <th className="border-2 px-2 min-w-[180px] text-center">Observações</th>
-          <th className="border-2 px-4 py-3">Ações</th>
+          <th className="border p-2">Valor</th>
+          <th className="border p-2">Pagamento</th>
+          <th className="border p-2 min-w-[180px] text-center">Observações</th>
+          <th className="border p-2">Ações</th>
         </tr>
       </thead>
       <tbody>
@@ -441,7 +429,7 @@ className="bg-secondary px-4 py-2 rounded hover:bg-alternativo text-white shadow
  </div>
 </div>
 
-    </div>
+    
   );
 };
 

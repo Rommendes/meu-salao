@@ -1,8 +1,6 @@
 import React ,{ useState } from "react"
 import {  Routes, Route} from "react-router-dom"
 import 'material-icons/iconfont/material-icons.css'
-
-
 import Login from './Pages/Login'
 import Home from "./Pages/Home"
 import CadastrarCliente from "./Pages/CadastrarCliente.jsx";
