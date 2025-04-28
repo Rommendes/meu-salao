@@ -5,11 +5,11 @@ import 'material-icons/iconfont/material-icons.css'
 
 import Login from './Pages/Login'
 import Home from "./Pages/Home"
-import CadastrarCliente from "./Componentes/CadastrarCliente/CadastrarCliente";
-import ListaClientes from "./Componentes/ListaClientes/ListaClientes.jsx"
+import CadastrarCliente from "./Pages/CadastrarCliente.jsx";
+import ListaClientes from "./Pages/ListaClientes.jsx"
 import EditarCliente from "./Componentes/EditarCliente/editarCliente.jsx"
 import Agenda from "./Pages/Agenda.jsx"
-import BuscaCliente from "./Componentes/Clientes/buscaCliente.jsx"
+import BuscaCliente from "./Pages/buscaCliente.jsx"
 import HistoricoSemanal from "./Pages/HistoricoSemanal.jsx"
 import CobrancasPendentes from "./Pages/EnviarCobrancasPendentes.jsx"
 
