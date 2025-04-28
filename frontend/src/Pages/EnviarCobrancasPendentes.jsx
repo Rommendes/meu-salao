@@ -3,6 +3,7 @@ import axios from "axios";
 import { SendHorizonal } from "lucide-react";
 import { supabase } from "../../src/api/supabaseClient";
 import BotaoEnviarCobranca from "../Componentes/BotaoEnviarCobranca";
+import Header from "../Componentes/Header/Header";
 
 const EnviarCobrancasPendentes = () => {
   const [pendentes, setPendentes] = useState([]);
@@ -73,7 +74,8 @@ const EnviarCobrancasPendentes = () => {
   
   return (
     <div className="p-4 max-w-4xl mx-auto">
-      <h2 className="text-2xl font-semibold mb-6 text-center">Cobranças Pendentes</h2>
+      <Header title="Cobranças Pendentes" />
+      <h2 className="text-2xl font-semibold mb-6 text-center text-primary">Enviar Cobranças Pendentes</h2>
 
       {carregando ? (
         <p className="text-center text-gray-500">Carregando pendências...</p>
@@ -89,7 +91,7 @@ const EnviarCobrancasPendentes = () => {
               Enviar Todos
             </button>
           </div>
-          
+
         <table className="w-full border-collapse border border-gray-300">
           <thead className="bg-gray-100">
             <tr>
@@ -102,7 +104,7 @@ const EnviarCobrancasPendentes = () => {
           </thead>
           <tbody>
             {pendentes.map((agendamento) => (
-              <tr key={agendamento.id} className="text-center">
+              <tr key={agendamento.id} className="text-left">
                 <td className="border p-2">{agendamento.cliente?.nome || "—"}</td>
                 <td className="border p-2">{agendamento.cliente?.telefone || "—"}</td>
                 <td className="border p-2">R$ {agendamento.valor}</td>
