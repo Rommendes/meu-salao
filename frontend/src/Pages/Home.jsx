@@ -1,6 +1,6 @@
 import { Link} from "react-router-dom";
 import { useState } from "react";
-import minhaImagem from "../assets/mulher.svg";
+import minhaImagem from "../assets/mulher.svg"
 import BotaoSair from "../Componentes/BotaoSair/index.jsx";
 
 export default function Home() {

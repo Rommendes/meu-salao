@@ -1,6 +1,0 @@
-{
-    "schedule": "@daily",
-    "path": "/api/enviar-cobrancas",
-    "method": "GET"
-  }
-  
