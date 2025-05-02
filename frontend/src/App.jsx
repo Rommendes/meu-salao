@@ -10,6 +10,7 @@ import Agenda from "./Pages/Agenda.jsx"
 import BuscaCliente from "./Pages/buscaCliente.jsx"
 import HistoricoSemanal from "./Pages/HistoricoSemanal.jsx"
 import CobrancasPendentes from "./Pages/EnviarCobrancasPendentes.jsx"
+import EnviarCobrancasPendentes from "./Pages/EnviarCobrancasPendentes.jsx"
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
       <Route path="/agenda" element= { <Agenda/> }/>
       <Route path="/historico-semanal" element= { <HistoricoSemanal/> }/>
       <Route path="cobrancas" element= { <CobrancasPendentes/> }/>
+      <Route path="/cobrancas" element={<EnviarCobrancasPendentes />} />
   
     </Routes>
     </div>

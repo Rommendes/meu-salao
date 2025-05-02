@@ -1,3 +1,6 @@
+import cors from "cors";
+
+app.use(cors());
 export default function cors(req, res) {
     return new Promise((resolve) => {
       res.setHeader("Access-Control-Allow-Credentials", true);

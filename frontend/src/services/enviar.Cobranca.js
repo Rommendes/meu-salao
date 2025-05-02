@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function enviarCobranca({ nome, telefone, valor }) {
   try {
-    const response = await axios.post('/api/enviar-cobrancas', {
+    const response = await axios.post('/api/cobrancas/enviar-cobrancas', {
       nome,
       telefone,
       valor
