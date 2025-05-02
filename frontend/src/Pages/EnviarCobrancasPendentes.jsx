@@ -2,13 +2,28 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { SendHorizonal } from "lucide-react";
 import { supabase } from "../../src/api/supabaseClient";
+import { buscarCobrancasPendentes } from "../api/cobrancaApi";
 import BotaoEnviarCobranca from "../Componentes/BotaoEnviarCobranca";
 import Header from "../Componentes/Header/Header";
 
 const EnviarCobrancasPendentes = () => {
+  const [cobrancas, setCobrancas] = useState([]);
   const [pendentes, setPendentes] = useState([]);
   const [statusEnvio, setStatusEnvio] = useState({});
   const [carregando, setCarregando] = useState(false);
+
+  useEffect(() => {
+    async function carregarCobrancas() {
+      try {
+        const dados = await buscarCobrancasPendentes();
+        setCobrancas(dados);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    carregarCobrancas();
+  }, []);
 
   useEffect(() => {
     const buscarPendencias = async () => {
@@ -46,7 +61,7 @@ const EnviarCobrancasPendentes = () => {
     }
 
     try {
-      const resposta = await axios.post("/api/enviar-cobrancas", {
+      const resposta = await axios.post('/api/cobrancas/enviar-cobrancas', {
         nome: cliente.nome,
         telefone: cliente.telefone,
         valor,
