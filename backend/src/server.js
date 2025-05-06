@@ -1,16 +1,18 @@
-import express from 'express';
-import cors from 'cors';
-import cobrancaRouter from './api/enviar-cobrancas.js';
+import express from "express";
+import cors from "cors";
+import enviarCobrancas from "./api/enviar-cobrancas.js"; // Caminho certo
 
 const app = express();
+const PORT = process.env.PORT || 3001;
+
 app.use(cors());
 app.use(express.json());
 
-// Endpoint para enviar cobranças
-app.use('/api/enviar-cobrancas', cobrancaRouter);
+app.use("/enviar-cobrancas", enviarCobrancas ); // Agora funciona certinho
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+app.get('/', (req, res) => {
+  res.send('Servidor backend funcionando!');
 });
-
+app.listen(PORT, () => {
+  console.log(`Servidor backend rodando em http://localhost:${PORT}`);
+});
