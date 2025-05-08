@@ -1,3 +1,4 @@
+//src/services/cobrancasService.js
 import supabase from '../lib/supabase.js';
 import formatarTelefone from '../utilitarios/formatarTelefone.js';
 import formatarValor from '../utilitarios/formatarValor.js';
@@ -19,7 +20,6 @@ export async function enviarCobrancasPendentes() {
     const valorFormatado = formatarValor(valor);
 
     const mensagem = `Olá ${clientes.nome}, você está com uma pendência de R$ ${valorFormatado}. Por favor, entre em contato.`;
-
     const url = `https://api.callmebot.com/whatsapp.php?phone=${telefone}&text=${encodeURIComponent(mensagem)}&apikey=${process.env.CALLMEBOT_KEY}`;
 
     const resposta = await fetch(url);
