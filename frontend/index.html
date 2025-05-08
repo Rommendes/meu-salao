@@ -9,6 +9,8 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="./src/main.jsx"></script>
-  </body>
+    <script type="module" src="./src/main.jsx">
+      console.log(import.meta.env.VITE_BACKEND_URL); // Agora funciona
+    </script>
+    
 </html>

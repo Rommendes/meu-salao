@@ -1,22 +1,12 @@
-// backend/src/routes/cobrancasRoutes.js
-import express from "express";
-import { buscarCobrancasPendentes } from "../services/cobrancasServices.js";
-import { enviarCobranca } from "../controllers/cobrancasController.js";
+//src/controllers/cobrancaController.js
+import { enviarCobrancasPendentes } from '../services/cobrancasService.js';
 
-const router = express.Router();
-
-// Rota GET principal
-router.get("/", async (req, res) => {
+export async function enviarCobrancas(req, res) {
   try {
-    const dados = await buscarCobrancasPendentes();
-    res.json(dados);
+    const resultado = await enviarCobrancasPendentes();
+    res.json({ success: true, resultado });
   } catch (error) {
-    console.error("Erro ao buscar cobranças:", error);
-    res.status(500).json({ error: "Erro ao buscar cobranças pendentes" });
+    console.error('Erro ao enviar cobranças:', error);
+    res.status(500).json({ success: false, message: error.message });
   }
-});
-
-// Rota POST para enviar cobranças
-router.post("/enviar-cobrancas", enviarCobranca);
-
-export default router;
+}

@@ -1,18 +1,19 @@
-import express from "express";
-import cors from "cors";
-import enviarCobrancas from "./api/enviar-cobrancas.js"; // Caminho certo
+import express from 'express';
+import cors from 'cors';
+import cobrancasRoutes from './routes/cobrancasRoutes.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
-
 app.use(cors());
 app.use(express.json());
 
-app.use("/enviar-cobrancas", enviarCobrancas ); // Agora funciona certinho
+// Rotas
+app.use('/api/cobrancas', cobrancasRoutes);
 
-app.get('/', (req, res) => {
-  res.send('Servidor backend funcionando!');
-});
+// Inicialização
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`Servidor backend rodando em http://localhost:${PORT}`);
+  console.log(`🚀 Servidor rodando na porta ${PORT}`);
 });
