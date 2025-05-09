@@ -11,12 +11,12 @@ export async function getAgendamentosPendentes() {
   const { data, error } = await supabase
     .from("agendamentos")
     .select("*")
-    //.eq("pagamento", false); // ou qualquer outra lógica para "pendente"
+    .eq("pagamento", "Não pagou"); // ou qualquer outra lógica para "pendente"
 
   if (error) {
     console.error("Erro ao buscar agendamentos pendentes:", error.message);
     return [];
   }
-
+   console.log("Dados recebidos do Supabase:", data); // 👈 adicione isto
   return data;
 }
