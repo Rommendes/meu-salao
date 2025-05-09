@@ -6,18 +6,17 @@ const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-// frontend/src/api/supabaseCliente.js
-
-import { supabase } from "./supabaseClient";
-
-// Função para buscar os agendamentos com pagamento pendente
+// ✅ Adicione esta função no mesmo arquivo
 export async function getAgendamentosPendentes() {
   const { data, error } = await supabase
     .from("agendamentos")
     .select("*")
-    .eq("pagamento", false); // ou ajuste conforme o nome real da coluna
+    //.eq("pagamento", false); // ou qualquer outra lógica para "pendente"
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    console.error("Erro ao buscar agendamentos pendentes:", error.message);
+    return [];
+  }
 
   return data;
 }

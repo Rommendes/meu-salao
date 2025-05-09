@@ -1,19 +1,16 @@
 import express from 'express';
 import cors from 'cors';
-import cobrancasRoutes from './routes/cobrancasRoutes.js';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import cobrancaRouter from './api/enviar-cobrancas.js';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Rotas
-app.use('/api/cobrancas', cobrancasRoutes);
+// Endpoint para enviar cobranças
+app.use('/api/enviar-cobrancas', cobrancaRouter);
 
-// Inicialização
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando na porta ${PORT}`);
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
+
