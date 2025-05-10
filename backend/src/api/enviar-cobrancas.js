@@ -1,6 +1,8 @@
-//backend/src/api/cobrancas/-cobrancas
 import express from 'express';
-import { enviarCobrancasPendentes } from "../services/cobrancasService.js";
+import { enviarMensagemWhatsApp } from '../services/enviarMensagemWhatsApp.js';
+import formatarTelefone from '../utilitarios/formatarTelefone.js';
+import formatarValor from '../utilitarios/formatarValor.js';
+
 const router = express.Router();
 
 router.post('/', async (req, res) => {
@@ -9,24 +11,25 @@ router.post('/', async (req, res) => {
   if (!nome || !telefone || !valor) {
     return res.status(400).json({ message: "Nome, telefone e valor são obrigatórios." });
   }
-  console.log("Dados recebidos:", { nome, telefone, valor });
-  const telefoneLimpo = telefone.replace(/\D/g, "");
-  if (telefoneLimpo.length < 10 || telefoneLimpo.length > 11) {
-    return res.status(400).json({ message: "Telefone inválido. Verifique o número." });
-  }
+
+  const telefoneFormatado = formatarTelefone(telefone);
+  const valorFormatado = formatarValor(valor);
 
   try {
-    const resposta = await enviarCobrancasPendentes(nome, telefoneLimpo, valor);
+    const resultado = await enviarMensagemWhatsApp(nome, telefoneFormatado, valorFormatado);
+    console.log("📤 Resultado:", resultado);
 
-    if (resposta.success) {
+    if (resultado.messages) {
       return res.status(200).json({ message: "Cobrança enviada com sucesso!" });
     } else {
-      return res.status(500).json({ message: "Falha no envio da cobrança." });
+      return res.status(500).json({ message: "Falha no envio pelo WhatsApp.", detalhe: resultado });
     }
   } catch (error) {
-    console.error("Erro ao enviar cobrança:", error);
-    return res.status(500).json({ message: "Erro interno no servidor." });
+    console.error("❌ Erro no envio:", error);
+    return res.status(500).json({ message: "Erro interno ao enviar cobrança." });
   }
 });
 
 export default router;
+
+

@@ -1,14 +1,17 @@
-export const formatarTelefoneParaCallMeBot = (telefoneBr) => {
-    const apenasNumeros = telefoneBr.replace(/\D/g, "");
-  
-    if (apenasNumeros.startsWith("55") && apenasNumeros.length === 13) {
-      return apenasNumeros;
-    }
-  
-    if (apenasNumeros.length === 11) {
-      return `55${apenasNumeros}`;
-    }
-  
-    return null; // Telefone inválido
-  };
-  
+export default function formatarTelefoneExibicao(telefone) {
+  if (!telefone) return "";
+
+  const numeros = telefone.replace(/\D/g, "");
+
+  if (numeros.length === 11) {
+    // Celular: (11) 91234-5678
+    return `(${numeros.slice(0, 2)}) ${numeros.slice(2, 7)}-${numeros.slice(7)}`;
+  } else if (numeros.length === 10) {
+    // Fixo: (11) 1234-5678
+    return `(${numeros.slice(0, 2)}) ${numeros.slice(2, 6)}-${numeros.slice(6)}`;
+  }
+
+  return telefone; // Fallback (não formatado)
+}
+
+
