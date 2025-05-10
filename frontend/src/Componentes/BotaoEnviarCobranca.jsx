@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { enviarCobranca } from "../api/cobrancaApi"; // Ajuste o caminho conforme necessário
+import React, { useState} from "react";
+import { enviarCobranca } from "../api/cobrancaApi";
 
 export default function BotaoEnviarCobranca({ agendamento, atualizarStatus, status }) {
+  const [enviando, setEnviando] = useState(false);
   const [mensagem, setMensagem] = useState("");
   const [erro, setErro] = useState(false);
-  const [enviando, setEnviando] = useState(false);
 
   const handleClick = async () => {
     setEnviando(true);
@@ -13,10 +13,10 @@ export default function BotaoEnviarCobranca({ agendamento, atualizarStatus, stat
 
     try {
       const { nome, telefone } = agendamento.clientes || {};
-      const { valor } = agendamento;
+      const valor = agendamento.valor;
 
       if (!nome || !telefone || !valor) {
-        setMensagem("Dados incompletos para envio da cobrança.");
+        setMensagem("Dados incompletos.");
         setErro(true);
         return;
       }
@@ -26,9 +26,7 @@ export default function BotaoEnviarCobranca({ agendamento, atualizarStatus, stat
       setMensagem(response.message || "Cobrança enviada com sucesso!");
       atualizarStatus(agendamento.id, "enviado");
     } catch (error) {
-      const erroMsg = error.response?.data?.message || "Erro ao enviar cobrança.";
-      console.error("Erro detalhado:", error);
-      setMensagem(erroMsg);
+      setMensagem("Erro ao enviar cobrança.");
       setErro(true);
     } finally {
       setEnviando(false);
