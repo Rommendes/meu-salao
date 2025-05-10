@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { enviarCobranca } from "../services/enviarCobranca";
+import { useState } from "react";
+import { enviarCobranca } from "../api/cobrancaApi"; // Ajuste o caminho conforme necessário
 
-export default function BotaoEnviarCobrancas({ cliente }) {
-  const [enviando, setEnviando] = useState(false);
+export default function BotaoEnviarCobranca({ agendamento, atualizarStatus, status }) {
   const [mensagem, setMensagem] = useState("");
-  const [erro, setErro] = useState(false); // Novo estado para indicar erro visualmente, se quiser
+  const [erro, setErro] = useState(false);
+  const [enviando, setEnviando] = useState(false);
 
   const handleClick = async () => {
     setEnviando(true);
@@ -12,7 +12,8 @@ export default function BotaoEnviarCobrancas({ cliente }) {
     setErro(false);
 
     try {
-      const { nome, telefone, valor } = cliente;
+      const { nome, telefone } = agendamento.clientes || {};
+      const { valor } = agendamento;
 
       if (!nome || !telefone || !valor) {
         setMensagem("Dados incompletos para envio da cobrança.");
@@ -23,9 +24,10 @@ export default function BotaoEnviarCobrancas({ cliente }) {
       const response = await enviarCobranca({ nome, telefone, valor });
 
       setMensagem(response.message || "Cobrança enviada com sucesso!");
+      atualizarStatus(agendamento.id, "enviado");
     } catch (error) {
       const erroMsg = error.response?.data?.message || "Erro ao enviar cobrança.";
-      console.error("Erro detalhado:", error); // 👈 para debug
+      console.error("Erro detalhado:", error);
       setMensagem(erroMsg);
       setErro(true);
     } finally {
@@ -34,19 +36,18 @@ export default function BotaoEnviarCobrancas({ cliente }) {
   };
 
   return (
-    <div className="flex flex-col items-start space-y-2">
+    <div className="flex flex-col items-start gap-1">
       <button
+        className={`px-3 py-1 rounded ${
+          enviando ? "bg-gray-400" : "bg-blue-500 hover:bg-blue-600"
+        } text-white text-sm`}
         onClick={handleClick}
-        disabled={enviando}
-        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded disabled:opacity-50"
+        disabled={enviando || status === "enviado"}
       >
-        {enviando ? "Enviando..." : "Enviar Cobrança"}
+        {status === "enviado" ? "Enviado" : enviando ? "Enviando..." : "Enviar cobrança"}
       </button>
-
       {mensagem && (
-        <p className={`text-sm ${erro ? "text-red-600" : "text-green-600"}`}>
-          {mensagem}
-        </p>
+        <p className={`text-xs ${erro ? "text-red-600" : "text-green-600"}`}>{mensagem}</p>
       )}
     </div>
   );
