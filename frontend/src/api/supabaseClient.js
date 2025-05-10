@@ -10,7 +10,15 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 export async function getAgendamentosPendentes() {
   const { data, error } = await supabase
     .from("agendamentos")
-    .select("*")
+    .select(`
+      id,
+      data,
+      horario,
+      pagamento,
+      valor,
+      cliente_id,
+      clientes (nome, telefone)
+    `)
     .eq("pagamento", "Não pagou"); // ou qualquer outra lógica para "pendente"
 
   if (error) {

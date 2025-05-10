@@ -179,24 +179,23 @@ export default function EnviarCobrancasPendentes() {
         </thead>
         <tbody>
           {agendamentos.map((agendamento) => (
-            <tr key={agendamento.id} className="text-center">
-              <td className="border p-2">{agendamento.nome}</td>
-              <td className="border p-2">{agendamento.telefone}</td>
-              <td className="border p-2">R$ {agendamento.valor}</td>
-              <td className="border p-2">{statusEnvio[agendamento.id] || "Pendente"}</td>
-              <td className="border p-2">
-                <BotaoEnviarCobranca
-                  cliente={{
-                    nome: agendamento.nome,
-                    telefone: agendamento.telefone,
-                    valor: agendamento.valor,
-                  }}
-                  enviado={statusEnvio[agendamento.id] === "✅ Enviado"}
-                  onEnviado={(status) => atualizarStatus(agendamento.id, status)}
-                />
-              </td>
-            </tr>
-          ))}
+  <tr key={agendamento.id}>
+    <td>{agendamento.clientes?.nome || "Sem nome"}</td>
+    <td>{agendamento.clientes?.telefone || "Sem telefone"}</td>
+    <td>{agendamento.valor}</td>
+    <td>{agendamento.pagamento}</td>
+    <td>
+      <BotaoEnviarCobranca
+        agendamento={agendamento}
+        cliente={agendamento.clientes} // adicione esta linha
+        atualizarStatus={atualizarStatus}
+        status={statusEnvio[agendamento.id]}
+      />
+
+    </td>
+  </tr>
+))}
+
         </tbody>
       </table>
     </div>
