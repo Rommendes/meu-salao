@@ -1,7 +1,10 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import express from 'express';
 import cors from 'cors';
 import cobrancaRouter from './api/enviar-cobrancas.js';
 
+require('dotenv').config();
 const app = express();
 app.use(cors());
 app.use(express.json());
