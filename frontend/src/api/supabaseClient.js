@@ -14,9 +14,11 @@ export async function getAgendamentosPendentes() {
       id,
       data,
       horario,
+      servico,
       pagamento,
       valor,
       cliente_id,
+      obs,
       clientes (nome, telefone)
     `)
     .eq("pagamento", "Não pagou"); // ou qualquer outra lógica para "pendente"

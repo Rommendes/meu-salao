@@ -4,5 +4,6 @@ export function formatarValor(valor) {
   return numero.toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
+    minimumFractionDigits: 2,
   });
 }
