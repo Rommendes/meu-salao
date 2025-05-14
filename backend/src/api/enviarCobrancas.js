@@ -1,7 +1,9 @@
-import express from 'express';
-import { enviarMensagemWhatsApp } from '../services/enviarMensagemWhatsApp.js';
-import formatarTelefone from '../utilitarios/formatarTelefone.js';
-import formatarValor from '../utilitarios/formatarValor.js';
+// backend > src > api > enviarCobrancas.js
+
+const express = require('express');
+const { enviarMensagemWhatsApp } = require('../servicos/enviarMensagemWhatsApp'); // Usando require
+const formatarTelefone = require('../utilitarios/formatarTelefone');
+const formatarValor = require('../utilitarios/formatarValor');
 
 const router = express.Router();
 
@@ -30,6 +32,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;  // Usando module.exports para exportar o router
+
 
 

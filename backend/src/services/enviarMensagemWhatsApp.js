@@ -1,32 +1,25 @@
-// src/services/enviarMensagemWhatsapp.js
+// backend > src > servicos > enviarMensagemWhatsApp.js
 const twilio = require('twilio');
 
-// Carregar as credenciais da sua conta Twilio
-const accountSid = process.env.TWILIO_ACCOUNT_SID; // SID do Twilio
-const authToken = process.env.TWILIO_AUTH_TOKEN; // Auth Token do Twilio
-
-// Inicializar o cliente Twilio
+const accountSid = process.env.TWILIO_ACCOUNT_SID;  // SID do Twilio
+const authToken = process.env.TWILIO_AUTH_TOKEN;   // Auth Token do Twilio
 const client = twilio(accountSid, authToken);
 
-// Função para enviar mensagem via WhatsApp com Twilio
-const enviarMensagem = async (telefone, mensagem) => {
+const enviarMensagem = async (nome, telefone, valor) => {
   try {
-    // Enviando a mensagem via Twilio
-    const mensagemEnviada = await client.messages.create({
-      body: mensagem, // Mensagem a ser enviada
-      from: 'whatsapp:+15557625716', // Seu número de WhatsApp no Twilio
-      to: `whatsapp:${telefone}`, // Número do destinatário no formato WhatsApp
+    const mensagem = `Olá ${nome}, sua cobrança no valor de ${valor} foi gerada.`;
+
+    const resultado = await client.messages.create({
+      body: mensagem,  // Mensagem que será enviada
+      from: 'whatsapp:+15557625716',  // Seu número de WhatsApp Twilio
+      to: `whatsapp:${telefone}`,  // Número do destinatário
     });
 
-    // Exibir o SID da mensagem enviada no console (para monitoramento)
-    console.log('Mensagem enviada com sucesso:', mensagemEnviada.sid);
-    return mensagemEnviada;
+    return resultado;
   } catch (error) {
-    // Em caso de erro, exibe no console
-    console.error('Erro ao enviar mensagem:', error);
+    console.error('Erro ao enviar mensagem via Twilio:', error);
     throw new Error('Erro ao enviar mensagem via Twilio');
   }
 };
 
-module.exports = { enviarMensagem }; // Exporta a função para ser usada em outros arquivos
-
+module.exports = { enviarMensagem };  // Exportando com module.exports
