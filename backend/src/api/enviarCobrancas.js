@@ -1,8 +1,8 @@
 // backend > src > api > enviarCobrancas.js
 
 const express = require('express');
-const { enviarMensagemWhatsApp } = require('../servicos/enviarMensagemWhatsApp'); // Usando require
-const formatarTelefone = require('../utilitarios/formatarTelefone');
+const { enviarMensagemWhatsApp } = require('../services/enviarMensagemWhatsApp'); // Usando require
+const formatarTelefone = require('../utilitarios/formatarTelefone'); // Usando require
 const formatarValor = require('../utilitarios/formatarValor');
 
 const router = express.Router();
