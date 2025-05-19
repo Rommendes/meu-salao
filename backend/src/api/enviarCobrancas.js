@@ -1,9 +1,10 @@
 // backend > src > api > enviarCobrancas.js
-
 const express = require('express');
-const { enviarMensagemWhatsApp } = require('../services/enviarMensagemWhatsApp'); // Usando require
-const formatarTelefone = require('../utilitarios/formatarTelefone'); // Usando require
+const formatarTelefone = require('../utilitarios/formatarTelefone');  // Importando a função corretamente
 const formatarValor = require('../utilitarios/formatarValor');
+const { enviarMensagemWhatsApp } = require('../services/enviarMensagemWhatsApp');  // Importando a função de envio de mensagem
+
+console.log("Função formatarTelefone:", formatarTelefone);  // Verificando se a função foi importada corretamente
 
 const router = express.Router();
 
@@ -14,8 +15,8 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ message: "Nome, telefone e valor são obrigatórios." });
   }
 
-  const telefoneFormatado = formatarTelefone(telefone);
-  const valorFormatado = formatarValor(valor);
+  const telefoneFormatado = formatarTelefone(telefone);  // Chama a função formatarTelefone
+  const valorFormatado = formatarValor(valor);  // Chama a função formatarValor
 
   try {
     const resultado = await enviarMensagemWhatsApp(nome, telefoneFormatado, valorFormatado);
@@ -32,7 +33,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-module.exports = router;  // Usando module.exports para exportar o router
+module.exports = router;
 
 
 

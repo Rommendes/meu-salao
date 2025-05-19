@@ -1,12 +1,16 @@
-//src/controllers/cobrancaController.js
-import { enviarCobrancasPendentes } from '../services/cobrancasService.js';
+// backend > src > controllers > cobrancaController.js
+const supabase = require('../lib/supabase');
 
-export async function enviarCobrancas(req, res) {
-  try {
-    const resultado = await enviarCobrancasPendentes();
-    res.json({ success: true, resultado });
-  } catch (error) {
-    console.error('Erro ao enviar cobranças:', error);
-    res.status(500).json({ success: false, message: error.message });
+const getClientes = async (req, res) => {
+  const { data, error } = await supabase
+    .from('clientes')
+    .select('*');  // Exemplo de operação: selecionar todos os clientes
+
+  if (error) {
+    return res.status(500).json({ error: error.message });
   }
-}
+
+  return res.status(200).json(data);
+};
+
+module.exports = { getClientes };
