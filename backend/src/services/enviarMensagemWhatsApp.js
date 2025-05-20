@@ -1,6 +1,6 @@
 
 // backend > src > services > enviarMensagemWhatsapp.js
-const twilio = require('twilio');
+import twilio from 'twilio';  // Importando a biblioteca Twilio
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;  // SID do Twilio
 const authToken = process.env.TWILIO_AUTH_TOKEN;  // Token de autenticação do Twilio
@@ -24,4 +24,4 @@ const enviarMensagemWhatsApp = async (nome, telefone, valor) => {
   }
 };
 
-module.exports = { enviarMensagemWhatsApp };
+export { enviarMensagemWhatsApp };

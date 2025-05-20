@@ -1,22 +1,20 @@
 // backend > src > server.js
-require('dotenv').config();  // Carregar variáveis de ambiente
+import dotenv from 'dotenv';
+dotenv.config();  // Carregar as variáveis de ambiente do arquivo .env
 
-const express = require('express');
-const cors = require('cors');
-const { createClient } = require('@supabase/supabase-js');  // Exemplo com Supabase
-
-// Configurar o cliente do Supabase com as variáveis de ambiente
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+import express from 'express';
+import cors from 'cors';
+import cobrancaRoutes from './routes/cobrancaRoutes.js';  // Rota de cobranças
 
 const app = express();
-app.use(express.json());
-app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('Backend funcionando');
-});
+app.use(express.json());  // Middleware para processar JSON no corpo da requisição
+app.use(cors());  // Middleware para habilitar CORS
+
+app.use('/api/cobrancas', cobrancaRoutes);  // Rota /api/cobrancas para as cobranças
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
+

@@ -7,4 +7,4 @@ const router = express.Router();
 
 router.post('/enviar', enviarCobrancas); // POST para /api/cobrancas/enviar
 
-export default router;
+export  default router  ;

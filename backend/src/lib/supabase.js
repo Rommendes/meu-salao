@@ -1,23 +1,22 @@
-{/*}
+// backend > src > lib > supabase.js
 import { createClient } from '@supabase/supabase-js';
-import 'dotenv/config'; // Carrega as variáveis do .env automaticamente
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+// Carregar as variáveis de ambiente
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_ANON_KEY;  // Ou a chave de serviço, dependendo do seu caso
 
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+console.log('SUPABASE_URL:', process.env.SUPABASE_URL);
+console.log('SUPABASE_ANON_KEY:', process.env.SUPABASE_ANON_KEY);
+// Verifica se as variáveis de ambiente estão definidas
+
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error('SUPABASE_URL e SUPABASE_ANON_KEY são necessários!');
+}
+
+// Cria a instância do Supabase
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+
 
 export default supabase;
-}*/}
 
-// backend > src > lib > supabase.js
-require('dotenv').config();
-const { createClient } = require('@supabase/supabase-js');
-
-// Criar o cliente Supabase com a Service Role Key
-const supabase = createClient(
-  process.env.SUPABASE_URL,  // URL do Supabase
-  process.env.SUPABASE_SERVICE_ROLE_KEY  // A Service Role Key
-);
-
-module.exports = supabase;
