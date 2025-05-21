@@ -8,7 +8,11 @@ import express from 'express';
 import cors from 'cors';
 import cobrancaRoutes from './routes/cobrancasRoutes.js';  // Certifique-se de que está correto
 
+console.log('TWILIO_ACCOUNT_SID:', process.env.TWILIO_ACCOUNT_SID); 
+console.log('TWILIO_AUTH_TOKEN:', process.env.TWILIO_AUTH_TOKEN);
+
 const app = express();
+
 
 // Usar middleware
 app.use(express.json());

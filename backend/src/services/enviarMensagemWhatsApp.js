@@ -5,6 +5,10 @@ import twilio from 'twilio';  // Importando a biblioteca Twilio
 const accountSid = process.env.TWILIO_ACCOUNT_SID;  // SID do Twilio
 const authToken = process.env.TWILIO_AUTH_TOKEN;  // Token de autenticação do Twilio
 
+console.log('TWILIO_ACCOUNT_SID:', accountSid);  // Verifique se o SID está sendo lido corretamente
+console.log('TWILIO_AUTH_TOKEN:', authToken);
+
+
 const client = twilio(accountSid, authToken);
 
 const enviarMensagemWhatsApp = async (nome, telefone, valor) => {

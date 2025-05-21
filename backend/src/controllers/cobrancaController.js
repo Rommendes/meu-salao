@@ -1,5 +1,5 @@
 // backend > src > controllers > cobrancaController.js
-import supabase from '../lib/supabase.js';  // Importando a instância do Supabase
+import { enviarMensagemWhatsApp } from '../services/enviarMensagemWhatsApp.js';  // Importando a função de envio de mensagem WhatsApp
 
 // Função para enviar cobrança
 const enviarCobrancas = async (req, res) => {
@@ -11,9 +11,9 @@ const enviarCobrancas = async (req, res) => {
 
   // Lógica de envio de cobrança via WhatsApp ou outro serviço
   try {
-    // Exemplo: Enviar cobrança via WhatsApp (a função enviarMensagemWhatsApp precisa ser implementada)
-    const resultado = await enviarMensagemWhatsApp(nome, telefone, valor);  // Supondo que você tenha uma função para enviar mensagens no WhatsApp
     
+    const resultado = await enviarMensagemWhatsApp(nome, telefone, valor);  // Chamada para a função de envio de mensagem WhatsApp 
+
     if (resultado.messages) {
       return res.status(200).json({ message: "Cobrança enviada com sucesso!" });
     } else {
