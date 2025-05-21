@@ -1,17 +1,20 @@
-// backend > src > server.js
 import dotenv from 'dotenv';
-dotenv.config();  // Carregar as variáveis de ambiente do arquivo .env
+dotenv.config();  // Carregar variáveis de ambiente
+
+console.log('SUPABASE_URL:', process.env.SUPABASE_URL);
+console.log('SUPABASE_ANON_KEY:', process.env.SUPABASE_ANON_KEY);
 
 import express from 'express';
 import cors from 'cors';
-import cobrancaRoutes from './routes/cobrancaRoutes.js';  // Rota de cobranças
+import cobrancaRoutes from './routes/cobrancasRoutes.js';  // Certifique-se de que está correto
 
 const app = express();
 
-app.use(express.json());  // Middleware para processar JSON no corpo da requisição
-app.use(cors());  // Middleware para habilitar CORS
+// Usar middleware
+app.use(express.json());
+app.use(cors());
 
-app.use('/api/cobrancas', cobrancaRoutes);  // Rota /api/cobrancas para as cobranças
+app.use('/api/cobrancas', cobrancaRoutes);  // A rota /api/cobrancas vai usar a rota do cobrancaRoutes.js
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
