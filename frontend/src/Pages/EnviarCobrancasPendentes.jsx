@@ -1,9 +1,12 @@
 
 
 import React, { useEffect, useState } from "react";
-import BotaoEnviarCobranca from "../Componentes/BotaoEnviarCobranca.jsx";
+import BotaoEnviarCobranca from "../Componentes/BotaoEnviarCobranca/BotaoEnviarCobranca.jsx";
 import { getAgendamentosPendentes } from "../api/supabaseClient.js"; 
 import formatarTelefoneExibicao from "../Componentes/Utilitarios/formatarTelefone.js";
+
+
+
 export default function EnviarCobrancasPendentes() {
   const [agendamentos, setAgendamentos] = useState([]);
   const [statusEnvio, setStatusEnvio] = useState({});

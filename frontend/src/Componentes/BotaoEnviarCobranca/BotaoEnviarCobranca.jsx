@@ -1,5 +1,5 @@
 import React, { useState} from "react";
-import { enviarCobranca } from "../api/cobrancaApi";
+import { enviarCobranca } from "../../services/enviarCobranca.js";
 
 export default function BotaoEnviarCobranca({ agendamento, atualizarStatus, status }) {
   const [enviando, setEnviando] = useState(false);
