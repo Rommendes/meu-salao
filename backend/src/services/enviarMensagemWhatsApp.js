@@ -1,5 +1,8 @@
 
-// backend > src > services > enviarMensagemWhatsapp.js
+// backend/src/services/enviarMensagemWhatsApp.js
+import dotenv from 'dotenv';
+dotenv.config();  // Carregar variáveis de ambiente
+
 import twilio from 'twilio';  // Importando a biblioteca Twilio
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;  // SID do Twilio
@@ -7,7 +10,6 @@ const authToken = process.env.TWILIO_AUTH_TOKEN;  // Token de autenticação do 
 
 console.log('TWILIO_ACCOUNT_SID:', accountSid);  // Verifique se o SID está sendo lido corretamente
 console.log('TWILIO_AUTH_TOKEN:', authToken);
-
 
 const client = twilio(accountSid, authToken);
 
@@ -23,9 +25,12 @@ const enviarMensagemWhatsApp = async (nome, telefone, valor) => {
 
     return resultado;
   } catch (error) {
-    console.error("Erro ao enviar mensagem:", error);
-    throw error;  // Re-lançar erro para ser tratado no controller
+    console.error("Erro ao enviar mensagem:", error.message || error);
+    throw new Error(`Erro ao enviar mensagem para o número ${telefone}: ${error.message || error}`);
   }
 };
 
-export { enviarMensagemWhatsApp };
+export default enviarMensagemWhatsApp;
+
+
+

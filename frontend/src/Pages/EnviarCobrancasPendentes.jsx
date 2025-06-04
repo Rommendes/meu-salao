@@ -1,11 +1,7 @@
-
-
 import React, { useEffect, useState } from "react";
 import BotaoEnviarCobranca from "../Componentes/BotaoEnviarCobranca/BotaoEnviarCobranca.jsx";
 import { getAgendamentosPendentes } from "../api/supabaseClient.js"; 
 import formatarTelefoneExibicao from "../Componentes/Utilitarios/formatarTelefone.js";
-
-
 
 export default function EnviarCobrancasPendentes() {
   const [agendamentos, setAgendamentos] = useState([]);
@@ -39,23 +35,20 @@ export default function EnviarCobrancasPendentes() {
         </thead>
         <tbody>
           {agendamentos.map((agendamento) => (
-  <tr key={agendamento.id}>
-    <td>{agendamento.clientes?.nome || "Sem nome"}</td>
-    <td>{formatarTelefoneExibicao(agendamento.clientes?.telefone) || "Sem telefone"}</td>
-    <td>{agendamento.valor}</td>
-    <td>{agendamento.pagamento}</td>
-    <td>
-      <BotaoEnviarCobranca
-        agendamento={agendamento}
-        cliente={agendamento.clientes} // adicione esta linha
-        atualizarStatus={atualizarStatus}
-        status={statusEnvio[agendamento.id]}
-      />
-
-    </td>
-  </tr>
-))}
-
+            <tr key={agendamento.id}>
+              <td>{agendamento.clientes?.nome || "Sem nome"}</td>
+              <td>{formatarTelefoneExibicao(agendamento.clientes?.telefone) || "Sem telefone"}</td>
+              <td>{agendamento.valor}</td>
+              <td>{agendamento.pagamento}</td>
+              <td>
+                <BotaoEnviarCobranca
+                  agendamento={agendamento}
+                  atualizarStatus={atualizarStatus}
+                  status={statusEnvio[agendamento.id]}
+                />
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
