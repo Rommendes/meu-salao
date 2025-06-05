@@ -15,18 +15,31 @@ const client = twilio(accountSid, authToken);
 
 const enviarMensagemWhatsApp = async (nome, telefone, valor) => {
   try {
-    const mensagem = `Olá ${nome}, sua cobrança no valor de ${valor} foi gerada.`;
+    // Remover todos os caracteres não numéricos do telefone
+    const telefoneFormatado = telefone.replace(/\D/g, '');  // Remove todos os caracteres não numéricos
 
-    const resultado = await client.messages.create({
-      body: mensagem,
-      from: 'whatsapp:+15557625716',  // Número de WhatsApp do Twilio
-      to: `whatsapp:${telefone}`      // Número de telefone do cliente
-    });
+    // Verifique se o telefone tem 11 dígitos (formato de celular brasileiro)
+    if (telefoneFormatado.length === 11) {
+      // Adiciona o prefixo do WhatsApp
+      const telefoneTwilio = `whatsapp:+55${telefoneFormatado}`;
 
-    return resultado;
+      console.log('Telefone formatado para Twilio:', telefoneTwilio);  // Verifique o telefone formatado
+
+      const mensagem = `Olá ${nome}, sua cobrança no valor de ${valor} foi gerada.`;
+
+      const resultado = await client.messages.create({
+        body: mensagem,
+        from: 'whatsapp:+14155238886',  // Número do WhatsApp do Twilio
+        to: telefoneTwilio  // Passa o telefone formatado diretamente
+      });
+
+      return resultado;
+    } else {
+      throw new Error('Número de telefone inválido');
+    }
   } catch (error) {
-    console.error("Erro ao enviar mensagem:", error.message || error);
-    throw new Error(`Erro ao enviar mensagem para o número ${telefone}: ${error.message || error}`);
+    console.error("Erro ao enviar mensagem:", error);
+    throw error;  // Re-lançar erro para ser tratado no controller
   }
 };
 
