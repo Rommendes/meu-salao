@@ -29,7 +29,7 @@ const enviarMensagemWhatsApp = async (nome, telefone, valor) => {
 
       const resultado = await client.messages.create({
         body: mensagem,
-        from: 'whatsapp:+14155238886',  // Número do WhatsApp do Twilio
+        from: 'whatsapp:+15418593259',  // Número do WhatsApp do Twilio
         to: telefoneTwilio  // Passa o telefone formatado diretamente
       });
 
@@ -43,7 +43,18 @@ const enviarMensagemWhatsApp = async (nome, telefone, valor) => {
   }
 };
 
+const nome = "João";
+const telefone = "(55) 99987-0951";
+const valor = 150;
+
+enviarMensagemWhatsApp(nome, telefone, valor)
+  .then(resultado => {
+    console.log("Mensagem enviada com sucesso!", resultado);
+  })
+  .catch(error => {
+    console.error("Erro ao enviar mensagem:", error);
+  });
+
+
 export default enviarMensagemWhatsApp;
-
-
 

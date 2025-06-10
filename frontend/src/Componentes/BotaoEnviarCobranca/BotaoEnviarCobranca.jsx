@@ -15,7 +15,7 @@ export default function BotaoEnviarCobranca({ agendamento, atualizarStatus, stat
       const { nome, telefone } = agendamento.clientes || {};
       const valor = agendamento.valor;
 
-       console.log('Telefone:', telefone);
+       console.log('Telefone original:', telefone);
 
       if (!nome || !telefone || !valor) {
         setMensagem("Dados incompletos.");
