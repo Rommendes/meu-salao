@@ -1,6 +1,6 @@
 import React, { useState} from "react";
 import { enviarCobranca } from "../../services/enviarCobranca.js";
-import formatarTelefoneParaTwilio from "../Utilitarios/formatarTelefone.js";
+
 export default function BotaoEnviarCobranca({ agendamento, atualizarStatus, status }) {
   const [enviando, setEnviando] = useState(false);
   const [mensagem, setMensagem] = useState("");
@@ -23,8 +23,6 @@ export default function BotaoEnviarCobranca({ agendamento, atualizarStatus, stat
         return;
       }
 
-       // Formatar o telefone para o formato internacional
-      const telefoneFormatado = formatarTelefoneParaTwilio(telefone);
       
        // Verifique se o telefone foi formatado corretamente
       if (!telefoneFormatado) {

@@ -1,17 +1,12 @@
-export default function formatarTelefoneExibicao(telefone) {
-  if (!telefone) return "";
+export default function formatarTelefone(telefone) {
+  // Remove todos os caracteres não numéricos (apenas números)
+  const telefoneFormatado = telefone.replace(/\D/g, '');
 
-  const numeros = telefone.replace(/\D/g, "");
-
-  if (numeros.length === 11) {
-    // Celular: (11) 91234-5678
-    return `(${numeros.slice(0, 2)}) ${numeros.slice(2, 7)}-${numeros.slice(7)}`;
-  } else if (numeros.length === 10) {
-    // Fixo: (11) 1234-5678
-    return `(${numeros.slice(0, 2)}) ${numeros.slice(2, 6)}-${numeros.slice(6)}`;
+  // Verifique se o número tem 11 dígitos (como um celular brasileiro)
+  if (telefoneFormatado.length === 11) {
+    return `whatsapp:+55${telefoneFormatado}`;
+  } else {
+    // Caso não tenha o formato esperado, retorne um erro ou mensagem
+    return null;  // Ou você pode lançar um erro se o número estiver inválido
   }
-
-  return telefone; // Fallback (não formatado)
 }
-
-
