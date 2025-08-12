@@ -1,8 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();  // Carregar variáveis de ambiente
 console.log('Carregando variáveis de ambiente:');
-console.log('TWILIO_ACCOUNT_SID:', process.env.TWILIO_ACCOUNT_SID);
-console.log('TWILIO_AUTH_TOKEN:', process.env.TWILIO_AUTH_TOKEN);
+
 console.log('SUPABASE_URL:', process.env.SUPABASE_URL);
 console.log('SUPABASE_ANON_KEY:', process.env.SUPABASE_ANON_KEY);
 
